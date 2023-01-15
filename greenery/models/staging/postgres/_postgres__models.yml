@@ -1,0 +1,39 @@
+version: 2
+
+models:
+  - name: stg_postgres__addresses
+    description: "addresses of greenery users and orders"
+    columns:
+    - name: address_guid 
+      description: "primary key for this view"
+    - name: address
+      description: "street address as string"
+    - name: zipcode
+    - name: state 
+    - name: country
+
+  - name: stg_postgres__events
+    description: "greenery site events"
+    columns:
+    - name: event_guid
+      description: "primary key for this view"
+
+  - name: stg_postgres__orders
+    description: "greenery site orders"
+    columns: 
+    - name: order_guid
+      description: "primary key"
+    - name: user_guid
+      description: "guid of the user who placed the order"
+    - name: promo_description
+    - name: address_guid
+      description: "shipping address"
+    - name: created_at_utc
+    - name: order_cost
+    - name: shipping_cost
+    - name: order_total
+    - name: tracking_id 
+    - name: shipping_service
+    - name: estimated_delivery_at_utc
+    - name: delivered_at_utc,
+    - name: status
