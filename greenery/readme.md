@@ -1,5 +1,4 @@
 ## Short answer questions - Week 1
----
 
 
 **1. How many users do we have?**

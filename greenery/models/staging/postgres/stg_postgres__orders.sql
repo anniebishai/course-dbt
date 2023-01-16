@@ -6,7 +6,7 @@ with src_orders as (
     select
       ORDER_ID as order_guid
       ,  USER_ID as user_guid
-      ,  PROMO_ID as promo_description
+      ,  PROMO_ID as promo_name
       ,  ADDRESS_ID as address_guid
       ,  CREATED_AT::timestampntz as created_at_utc
       ,  ORDER_COST

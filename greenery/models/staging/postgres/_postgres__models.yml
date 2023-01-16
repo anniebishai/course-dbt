@@ -2,7 +2,7 @@ version: 2
 
 models:
   - name: stg_postgres__addresses
-    description: "addresses of greenery users and orders"
+    description: "addresses of greenery users and orders, columns renamed from source"
     columns:
     - name: address_guid 
       description: "primary key for this view"
@@ -13,21 +13,43 @@ models:
     - name: country
 
   - name: stg_postgres__events
-    description: "greenery site events"
+    description: "greenery site events, columns renamed from source"
     columns:
     - name: event_guid
       description: "primary key for this view"
+    - name: session_guid
+    - name: user_guid
+      description: "join key with users table"
+    - name: page_url
+    - name: created_at_utc
+      description: "timestamp of the event"
+    - name: event_type
+      description: "page_view, add_to_cart, checkout, or package_shipped"
+    - name: order_guid
+      description: "join key with orders table"
+    - name: product_guid
+      description: "join key wiht products table"
+  
+  - name: stg_postgres__order_items
+    description: "detail of individuals items in orders, columns renamed from source"
+    columns:
+    - name: order_guid
+      description: "primary key"
+    - name: product_guid
+      description: "join key with products table"
+    - name: quantity
 
   - name: stg_postgres__orders
-    description: "greenery site orders"
+    description: "data on order placement, pricing, and tracking; columns renamed from source"
     columns: 
     - name: order_guid
       description: "primary key"
     - name: user_guid
-      description: "guid of the user who placed the order"
-    - name: promo_description
+      description: "join key with users table"
+    - name: promo_name
+      description: "join key with promos table"
     - name: address_guid
-      description: "shipping address"
+      description: "shipping address; join key with addresses table"
     - name: created_at_utc
     - name: order_cost
     - name: shipping_cost
@@ -37,3 +59,33 @@ models:
     - name: estimated_delivery_at_utc
     - name: delivered_at_utc,
     - name: status
+
+  - name: stg_postgres__products
+    description: "name, price, and inventory quantity of products; columns renamed from source"
+    columns: 
+    - name: product_guid
+      description: "primary key"
+    - name: price_usd
+    - name: inventory_qty
+  
+  - name: stg_postgres__promos
+    description: "promotions, columns renamed from source"
+    columns:  
+    - name: promo_name
+      description: "primary key"
+    - name: discount
+    - name: status
+  
+  - name: stg_postgres__users
+    description: "users, columns renamed from source"
+    columns:
+    - name: user_guid
+      description: "primary key"
+    - name: first_name
+    - name: last_name
+    - name: email
+    - name: phone_number
+    - name: created_at_utc
+    - name: updated_at_utc
+    - name: address_guid
+      description: "join key with addresses table"
