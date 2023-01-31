@@ -1,0 +1,5 @@
+version: 2
+
+models:
+  - name: fact_orders
+    description: order data including user name and quantity of products in order
